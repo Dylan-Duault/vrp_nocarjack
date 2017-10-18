@@ -2,29 +2,24 @@
 
 ### Version
 
-1.2.1
+1.0.0
 
 ### Description
 
-Yet pretty simple, but it should be efficient against the annoying NPC car-jacking and car stealing on roleplay based severs. This will force your players to find other means to reach their destination. The ability to steal cars is based on a "luck" factor.
-No more random grand theft auto.
+Yet pretty simple, but it should be efficient against the annoying NPC car-jacking and car stealing on roleplay based severs. This will force your players to find other means to reach their destination. The ability to steal cars is based on a chance factor.
 
 ### Features
 
-* Works on all vehicles (cars,bikes,trucks,helicopters,planes,boats,...)
+It should:
+* Work on all vehicles (cars,bikes,trucks,helicopters,planes,boats,...)
 * Prevent parked vehicle stealing
 * Prevent any kind of grand theft auto (car-jacking, passenger car-jack, etc)
-* Vehicle stealing/car-jacking is only allowed only by a predefined threshold
-* Compatible with any vehicle control script
-* Ability to skip a vehicle check with an event
-* Low CPU usage
+* Define vehicle stealing/car-jacking possibilities by a chance in client.lua
+* Be compatible with any vehicle control script
+* Enable me to add whatever other feature you like that makes sense in the scope of this script
 
 ### Installation
 
-1) Download from [the release page](https://github.com/winject/NoCarJack/releases) and extract the content in your `resources` directory
-2) Add `- nocarjack` in your _AutoStartResources_ ( `citmp-server.yml`)
+1) Put the folder nocarjack_lua in your resources folder
+2) Add "start nocarjack_lua" to your server.cfg
 3) Restart server
-
-### Usage
-
-See [the wiki](https://github.com/winject/NoCarJack/wiki/Usage) for usage and further information.
