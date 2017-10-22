@@ -1,3 +1,4 @@
+local vehicles = {}
 Citizen.CreateThread(function()
     while true do
 		-- gets if player is entering vehicle
@@ -24,23 +25,16 @@ Citizen.CreateThread(function()
 			  end
 			end
 
+			-- gets ped that is driving the vehicle
+            local pedd = GetPedInVehicleSeat(veh, -1)
 			-- lock doors if not lucky or blacklisted
-            if lock == 7 then
+            if (lock == 7 or pedd) and not vehicles[veh] then
 				if not lucky or blacklisted then
 					SetVehicleDoorsLocked(veh, 2)
 				else
 					SetVehicleDoorsLocked(veh, 1)
 				end
-            end
-
-			-- gets ped that is driving the vehicle
-            local pedd = GetPedInVehicleSeat(veh, -1)
-            -- checks if ped exists
-            if pedd then
-				-- make ped not draggable if not lucky or blacklisted
-				if not lucky or blacklisted then
-					SetPedCanBeDraggedOut(pedd, false)
-				end
+				vehicles[veh] = true
             end
         end
         Citizen.Wait(0)	    							
