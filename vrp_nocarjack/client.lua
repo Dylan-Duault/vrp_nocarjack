@@ -1,4 +1,10 @@
-local vehicles = {}
+vRPncj = {}
+Tunnel.bindInterface("vrp_nocarjack",vRPncj)
+Proxy.addInterface("vrp_nocarjack",vRPncj)
+NCJserver = Tunnel.getInterface("vrp_nocarjack","vrp_nocarjack")
+vRPserver = Tunnel.getInterface("vRP","vrp_nocarjack")
+vRP = Proxy.getInterface("vRP")
+
 Citizen.CreateThread(function()
     while true do
 		-- gets if player is entering vehicle
@@ -27,16 +33,20 @@ Citizen.CreateThread(function()
 
 			-- gets ped that is driving the vehicle
             local pedd = GetPedInVehicleSeat(veh, -1)
+			local plate = GetVehicleNumberPlateText(veh)
 			-- lock doors if not lucky or blacklisted
-            if (lock == 7 or pedd) and not vehicles[veh] then
+            if (lock == 7 or pedd) then
 				if not lucky or blacklisted then
-					SetVehicleDoorsLocked(veh, 2)
+					NCJserver.setVehicleDoorsForEveryone({veh, 2, plate})
 				else
-					SetVehicleDoorsLocked(veh, 1)
+					NCJserver.setVehicleDoorsForEveryone({veh, 1, plate})
 				end
-				vehicles[veh] = true
             end
         end
         Citizen.Wait(0)	    							
     end
 end)
+
+function vRPncj.setVehicleDoors(veh, doors)
+  SetVehicleDoorsLocked(veh, doors)
+end
