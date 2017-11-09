@@ -1,8 +1,12 @@
 vRPncj = {}
+local Tunnel = module("vrp", "lib/Tunnel")
+local Proxy = module("vrp", "lib/Proxy")
+local cfg = module("vrp_nocarjack", "cfg/nocarjack")
+
 Tunnel.bindInterface("vrp_nocarjack",vRPncj)
 Proxy.addInterface("vrp_nocarjack",vRPncj)
-NCJserver = Tunnel.getInterface("vrp_nocarjack","vrp_nocarjack")
-vRPserver = Tunnel.getInterface("vRP","vrp_nocarjack")
+NCJserver = Tunnel.getInterface("vrp_nocarjack")
+vRPserver = Tunnel.getInterface("vRP")
 vRP = Proxy.getInterface("vRP")
 
 Citizen.CreateThread(function()
@@ -37,13 +41,13 @@ Citizen.CreateThread(function()
 			-- lock doors if not lucky or blacklisted
             if (lock == 7 or pedd) then
 				if not lucky or blacklisted then
-					NCJserver.setVehicleDoorsForEveryone({veh, 2, plate})
+					NCJserver.setVehicleDoorsForEveryone(veh, 2, plate)
 				else
-					NCJserver.setVehicleDoorsForEveryone({veh, 1, plate})
+					NCJserver.setVehicleDoorsForEveryone(veh, 1, plate)
 				end
             end
         end
-        Citizen.Wait(0)	    							
+        Citizen.Wait(1)	    							
     end
 end)
 

@@ -2,13 +2,14 @@
 description "vrp_nocarjack"
 
 client_scripts{ 
-  "lib/Proxy.lua",
-  "lib/Tunnel.lua",
-  "cfg/nocarjack.lua",
+  "@vrp/lib/utils.lua",
   "client.lua"
 }
 
 server_scripts{ 
   "@vrp/lib/utils.lua",
   "server.lua"
+}
+files{
+  "cfg/nocarjack.lua"
 }
