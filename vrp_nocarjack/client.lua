@@ -12,6 +12,9 @@ Citizen.CreateThread(function()
 			-- gets vehicle player is trying to enter and its lock status
             local veh = GetVehiclePedIsTryingToEnter(PlayerPedId())
             local lock = GetVehicleDoorLockStatus(veh)
+	    
+	    -- Get the conductor door angle, open if value > 0.0
+            local doorAngle = GetVehicleDoorAngleRatio(veh, 0)
 			
 			-- normalizes chance
 			if cfg.chance > 100 then
@@ -23,6 +26,11 @@ Citizen.CreateThread(function()
 			-- check if got lucky
 			local lucky = (math.random(100) < cfg.chance)
 			
+			-- Set lucky if conductor door is open
+			if doorAngle > 0.0 then
+				lucky = true
+			end
+				
 			-- check if vehicle is in blacklist
 			local backlisted = false
 			for k,v in pairs(cfg.blacklist) do
